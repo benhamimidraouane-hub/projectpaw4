@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 1 - Interactive Attendance Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .good {
+            background-color: #d4edda;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+        }
+
+        .danger {
+            background-color: #f8d7da;
+        }
+
+        .present {
+            color: green;
+            font-weight: bold;
+        }
+
+        .absent {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Student Attendance & Participation</h1>
+
+    <table id="attendanceTable">
+        <thead>
+            <tr>
+                <th rowspan="2">Last Name</th>
+                <th rowspan="2">First Name</th>
+                <th colspan="2">Session 1</th>
+                <th colspan="2">Session 2</th>
+                <th colspan="2">Session 3</th>
+                <th colspan="2">Session 4</th>
+                <th colspan="2">Session 5</th>
+                <th colspan="2">Session 6</th>
+                <th rowspan="2">Absences</th>
+                <th rowspan="2">Participation</th>
+                <th rowspan="2">Message</th>
+            </tr>
+            <tr>
+                <th>S1</th>
+                <th>P1</th>
+                <th>S2</th>
+                <th>P2</th>
+                <th>S3</th>
+                <th>P3</th>
+                <th>S4</th>
+                <th>P4</th>
+                <th>S5</th>
+                <th>P5</th>
+                <th>S6</th>
+                <th>P6</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="student1">
+                <td>Ahmed</td>
+                <td>Sara</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td id="abs1">0</td>
+                <td id="part1">0</td>
+                <td id="msg1"></td>
+            </tr>
+            <tr id="student2">
+                <td>Yacine</td>
+                <td>Ali</td>
+                <td class="present">✓</td>
+                <td class="absent">✗</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td id="abs2">0</td>
+                <td id="part2">0</td>
+                <td id="msg2"></td>
+            </tr>
+            <tr id="student3">
+                <td>Houcine</td>
+                <td>Rania</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="present">✓</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td class="absent">✗</td>
+                <td id="abs3">0</td>
+                <td id="part3">0</td>
+                <td id="msg3"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function calculateAttendance() {
+            const students = [
+                { id: 'student1', absCell: 'abs1', partCell: 'part1', msgCell: 'msg1' },
+                { id: 'student2', absCell: 'abs2', partCell: 'part2', msgCell: 'msg2' },
+                { id: 'student3', absCell: 'abs3', partCell: 'part3', msgCell: 'msg3' }
+            ];
+
+            students.forEach((student, index) => {
+                const row = document.getElementById(student.id);
+                const cells = row.getElementsByTagName('td');
+                let absences = 0;
+                let participations = 0;
+
+                for (let i = 2; i <= 12; i += 2) {
+                    if (cells[i].textContent === '✗') {
+                        absences++;
+                    }
+                }
+
+
+                for (let i = 3; i <= 13; i += 2) {
+                    if (cells[i].textContent === '✓') {
+                        participations++;
+                    }
+                }
+
+                document.getElementById(student.absCell).textContent = absences + ' Abs';
+                document.getElementById(student.partCell).textContent = participations + ' Par';
+
+                let message = '';
+                if (absences < 3) {
+                    row.className = 'good';
+                    message = 'Good attendance – Excellent participation';
+                } else if (absences >= 3 && absences <= 4) {
+                    row.className = 'warning';
+                    message = 'Warning – attendance low – You need to participate more';
+                } else {
+                    row.className = 'danger';
+                    message = 'Excluded – too many absences – You need to participate more';
+                }
+
+                document.getElementById(student.msgCell).textContent = message;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', calculateAttendance);
+    </script>
+</body>
+
+</html>

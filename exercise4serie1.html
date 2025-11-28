@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exercise 4 - Mobile First</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Mobile First CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background: #f0f0f0;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: auto;
+        }
+
+        /* Navbar for mobile: dropdown */
+        .mobile-nav {
+            margin-bottom: 20px;
+        }
+
+        .mobile-nav select {
+            width: 100%;
+            padding: 10px;
+        }
+
+        /* Navbar for desktop */
+        .desktop-nav {
+            display: none;
+            background: #2c3e50;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .desktop-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 15px;
+        }
+
+        .desktop-nav a:hover {
+            background: #34495e;
+            border-radius: 3px;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #ecf0f1;
+        }
+
+        /* Form */
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+        }
+
+        form button {
+            width: 100%;
+            padding: 10px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background: #2ecc71;
+        }
+
+        /* Tablet and Desktop */
+        @media (min-width: 768px) {
+            .mobile-nav {
+                display: none;
+            }
+
+            .desktop-nav {
+                display: block;
+            }
+
+            .container {
+                max-width: 900px;
+            }
+
+            form input,
+            form button {
+                width: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Mobile First Design - Exercise 4</h1>
+
+        <!-- Mobile navbar -->
+        <nav class="mobile-nav">
+            <select onchange="location = this.value;">
+                <option value="#">Home</option>
+                <option value="#">Attendance</option>
+                <option value="#">Add Student</option>
+                <option value="#">Reports</option>
+                <option value="#">Logout</option>
+            </select>
+        </nav>
+
+        <!-- Desktop navbar -->
+        <nav class="desktop-nav">
+            <a href="#">Home</a>
+            <a href="#">Attendance</a>
+            <a href="#">Add Student</a>
+            <a href="#">Reports</a>
+            <a href="#">Logout</a>
+        </nav>
+
+        <!-- Table -->
+        <h2>Attendance Table</h2>
+        <table>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Present</th>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>John Smith</td>
+                <td>Web Programming</td>
+                <td>✅</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>Sarah Johnson</td>
+                <td>Database</td>
+                <td>❌</td>
+            </tr>
+        </table>
+
+        <!-- Form -->
+        <h2>Add Student Form</h2>
+        <form>
+            <label>Student ID:</label>
+            <input type="text" placeholder="Enter Student ID" required>
+            <br>
+            <label>Full Name:</label>
+            <input type="text" placeholder="Enter Full Name" required>
+            <br>
+            <label>Email:</label>
+            <input type="email" placeholder="Enter Email" required>
+            <button type="submit">Add Student</button>
+        </form>
+    </div>
+</body>
+
+</html>
